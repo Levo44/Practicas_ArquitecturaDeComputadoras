@@ -1,0 +1,19 @@
+void main(){
+
+    TRISB = 0;    // Configura Puerto B como salida
+    TRISC = 0;    // Configura Puerto C como salida
+    TRISD = 0;    // Configura Puerto D como salida
+    TRISE = 0;    // Configura Puerto E como salida
+
+    PORTB = 0;    // Inicializa en bajo
+    PORTC = 0;
+    PORTD = 0;
+    PORTE = 0;
+
+    while(1){
+        PORTB = ~PORTB;   // Invierte el estado del puerto B
+        PORTC = ~PORTC;   // Invierte el estado del puerto C
+        PORTD = ~PORTD;   // Invierte el estado del puerto D
+        PORTE = ~PORTE;   // Invierte el estado del puerto E
+    }
+}
