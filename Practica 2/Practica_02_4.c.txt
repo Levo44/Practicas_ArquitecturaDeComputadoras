@@ -1,0 +1,59 @@
+// Practica 02: Salida individual - Proyecto 2
+// PIC16F877A @ 16 MHz
+
+void paso1() {
+    RB0_bit=1; RB1_bit=0;
+    RC2_bit=1; RC3_bit=0;
+    RD4_bit=1; RD5_bit=0;
+    RE0_bit=1; RE1_bit=0;
+}
+
+void paso2() {
+    RB0_bit=1; RB1_bit=1;
+    RC2_bit=0; RC3_bit=0;
+    RD4_bit=1; RD5_bit=1;
+    RE0_bit=0; RE1_bit=0;
+}
+
+void paso3() {
+    RB0_bit=0; RB1_bit=1;
+    RC2_bit=1; RC3_bit=1;
+    RD4_bit=0; RD5_bit=1;
+    RE0_bit=1; RE1_bit=1;
+}
+
+void paso4() {
+    RB0_bit=1; RB1_bit=1;
+    RC2_bit=1; RC3_bit=1;
+    RD4_bit=0; RD5_bit=0;
+    RE0_bit=0; RE1_bit=0;
+}
+
+void paso5() {
+    RB0_bit=0; RB1_bit=1;
+    RC2_bit=0; RC3_bit=1;
+    RD4_bit=0; RD5_bit=1;
+    RE0_bit=0; RE1_bit=1;
+}
+
+void main() {
+    ADCON1 = 0x07;   // PORTA y PORTE como digitales (relevante para RE0/RE1)
+
+    TRISB = 0x00;    // B como salida
+    TRISC = 0x00;    // C como salida
+    TRISD = 0x00;    // D como salida
+    TRISE = 0x00;    // E como salida
+
+    PORTB = 0x00;
+    PORTC = 0x00;
+    PORTD = 0x00;
+    PORTE = 0x00;
+
+    while(1){
+        paso1(); Delay_ms(2000);
+        paso2(); Delay_ms(2000);
+        paso3(); Delay_ms(2000);
+        paso4(); Delay_ms(2000);
+        paso5(); Delay_ms(2000);
+    }
+}
