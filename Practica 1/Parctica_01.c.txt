@@ -1,0 +1,9 @@
+void main(){
+
+    TRISC = 0;       // Configura todos los pines del puerto C como salida
+    PORTC = 0;       // Inicializa el puerto en 0 (todos los LEDs apagados)
+
+    while(1){        // Bucle infinito
+        PORTC = ~PORTC;   // Invierte el valor del puerto (enciende/apaga LEDs)
+    }
+}
