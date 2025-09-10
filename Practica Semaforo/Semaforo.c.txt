@@ -1,0 +1,54 @@
+void main() {
+     TRISB = 0b00000001;  // RB0 como entrada (pulsador), el resto salidas
+     PORTB = 0x00;         // Inicializar todos los pines en 0
+
+     while(1){
+          if( PORTB.F0 == 1 ){  // --- MODO NORMAL ---
+              // Semáforo 1 en ROJO, Semáforo 2 en VERDE
+              PORTB.F7 = 1; // Rojo S1
+              PORTB.F6 = 0; // Amarillo S1
+              PORTB.F5 = 0; // Verde S1
+
+              PORTB.F3 = 0; // Rojo S2
+              PORTB.F2 = 0; // Amarillo S2
+              PORTB.F1 = 1; // Verde S2
+              Delay_ms(3000);  // 3 seg en verde
+
+              // Semáforo 2 en AMARILLO
+              PORTB.F1 = 0;
+              PORTB.F2 = 1;
+              Delay_ms(1000);  // 1 seg en amarillo
+              PORTB.F2 = 0;
+
+              // Semáforo 1 en VERDE, Semáforo 2 en ROJO
+              PORTB.F7 = 0;
+              PORTB.F5 = 1;
+
+              PORTB.F3 = 1;
+              PORTB.F1 = 0;
+              Delay_ms(3000);
+
+              // Semáforo 1 en AMARILLO
+              PORTB.F5 = 0;
+              PORTB.F6 = 1;
+              Delay_ms(1000);
+              PORTB.F6 = 0;
+          }
+          else{   // --- MODO NOCTURNO ---
+              // Ambos en AMARILLO intermitente
+              PORTB.F7 = 0; // Rojo S1 apagado
+              PORTB.F6 = 1; // Amarillo S1 encendido
+              PORTB.F5 = 0; // Verde S1 apagado
+
+              PORTB.F3 = 0; // Rojo S2 apagado
+              PORTB.F2 = 1; // Amarillo S2 encendido
+              PORTB.F1 = 0; // Verde S2 apagado
+              Delay_ms(500);
+
+              // Apagar ambos amarillos
+              PORTB.F6 = 0;
+              PORTB.F2 = 0;
+              Delay_ms(500);
+          }
+     }
+}
