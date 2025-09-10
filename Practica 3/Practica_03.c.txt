@@ -1,0 +1,46 @@
+/*
+ * Control de Servo Motor con PIC16F877A
+ * RB0 - Señal PWM para servo
+ */
+
+short conta;
+
+void main() {
+    TRISB = 0x00;    // Puerto B como salida
+    PORTB = 0x00;    // Inicializar PORTB en 0
+
+    while(1) {
+        // Posición 180° - Pulso de 2ms
+        conta = 0;
+        while(conta <= 50) {
+            PORTB.F0 = 1;       // Señal HIGH
+            Delay_us(2000);     // 2ms HIGH
+            PORTB.F0 = 0;       // Señal LOW
+            Delay_us(18000);    // 18ms LOW
+            conta++;
+        }
+        Delay_ms(2000);         // Espera 2 segundos
+
+        // Posición 90° - Pulso de 1.25ms
+        conta = 0;
+        while(conta <= 50) {
+            PORTB.F0 = 1;
+            Delay_us(1250);     // 1.25ms HIGH
+            PORTB.F0 = 0;
+            Delay_us(18750);    // 18.75ms LOW
+            conta++;
+        }
+        Delay_ms(2000);
+
+        // Posición 0° - Pulso de 0.5ms
+        conta = 0;
+        while(conta <= 50) {
+            PORTB.F0 = 1;
+            Delay_us(500);      // 0.5ms HIGH
+            PORTB.F0 = 0;
+            Delay_us(19500);    // 19.5ms LOW
+            conta++;
+        }
+        Delay_ms(2000);
+    }
+}
